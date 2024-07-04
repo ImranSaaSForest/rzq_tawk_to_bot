@@ -1,0 +1,19 @@
+{
+  "name": "rzq/tawk_to_bot",
+  "description": "setting up tawkto chatbot for rzq stores",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "RZQ\\TawkTo\\": "src/"
+    }
+  },
+
+  "authors": [
+    {
+      "name": "ImranSaaSForest",
+      "email": "imran@saasforest.com"
+    }
+  ],
+  "require": {}
+}
