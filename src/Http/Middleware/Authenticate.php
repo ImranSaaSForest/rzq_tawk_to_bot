@@ -1,3 +1,5 @@
+<?php 
+
 namespace RZQ\TawkTo\Http\Middleware;
 
 use Closure;
