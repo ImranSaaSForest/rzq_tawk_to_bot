@@ -3,6 +3,8 @@
 namespace RZQ\TawkTo\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Routing\Router;
 
 class TawkToServiceProvider extends ServiceProvider
 {
@@ -11,12 +13,18 @@ class TawkToServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Kernel $kernel)
     {
         // Publish the configuration file
         $this->publishes([
             __DIR__.'/../config/tawkto.php' => config_path('tawkto.php'),
         ]);
+        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+
+        $router = $this->app->make(Router::class);
+        $kernel->appendMiddlewareToGroup('web', Authenticate::class);
+        $router->aliasMiddleware('tawk.auth', Authenticate::class);
     }
 
     /**

@@ -8,7 +8,7 @@ class TawkTo
     {
         $propertyId = config('tawkto.property_id');
         $widgetId = config('tawkto.widget_id');
-        
+
         return <<<HTML
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();

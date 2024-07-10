@@ -9,6 +9,14 @@
     }
   },
 
+  "extra": {
+    "laravel": {
+      "providers": [
+        "RZQ\\TawkTo\\Providers\\TawkToServiceProvider"
+      ]
+    }
+  },
+
   "authors": [
     {
       "name": "ImranSaaSForest",
