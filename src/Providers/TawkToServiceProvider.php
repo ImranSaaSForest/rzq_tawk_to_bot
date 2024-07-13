@@ -5,6 +5,7 @@ namespace RZQ\TawkTo\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Routing\Router;
+use RZQ\TawkTo\Http\Middleware\Authenticate;
 
 class TawkToServiceProvider extends ServiceProvider
 {

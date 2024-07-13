@@ -16,10 +16,14 @@ class Authenticate
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::check()) {
-            return redirect('login'); // Or any other action you want to take
+        $user = Auth::user();
+        if ($user) {
+            $store = DB::table('stores')->where('shop_owner_id', $user->id)->first();
+            if ($store && !empty($store->store_id)) {
+                return $next($request);
+            }
         }
 
-        return $next($request);
+        return response('Store not registered', 403);
     }
 }
