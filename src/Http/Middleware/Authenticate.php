@@ -4,6 +4,7 @@ namespace RZQ\TawkTo\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Authenticate
 {
@@ -17,9 +18,10 @@ class Authenticate
     public function handle($request, Closure $next)
     {
         $user = Auth::user();
+    
         if ($user) {
             $store = DB::table('stores')->where('shop_owner_id', $user->id)->first();
-            if ($store && !empty($store->store_id)) {
+            if ($store && !empty($store->id)) {
                 return $next($request);
             }
         }
