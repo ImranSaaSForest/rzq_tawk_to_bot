@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('product_chat_settings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->string('store_id');
+            // $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->boolean('tawk_to_enabled')->default(false);
             $table->timestamps();
         });
