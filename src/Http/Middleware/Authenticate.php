@@ -19,15 +19,27 @@ class Authenticate
     public function handle($request, Closure $next)
     {
         $user = Auth::user();
-        $store = (object) json_decode(Store::store($request->access_store), true);
+     
+        if ($request->access_store) {
+            $exists = DB::table('product_chat_settings')
+                ->where('store_id', $request->access_store)
+                ->exists();
 
+            if (!$exists) {
+                DB::table('product_chat_settings')->insert([
+                    'store_id' => $request->access_store,
+                    'tawk_to_enabled' => false
+                ]);
+            }
+        }
         if ($user) {
             $store = DB::table('stores')->where('shop_owner_id', $user->id)->first();
             if ($store && !empty($store->id)) {
                 return $next($request);
             }
         }
-
-        return response('Store not registered', 403);
+        return $next($request);
+        // return response('Store not registered', 403);
     }
 }
+
