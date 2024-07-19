@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Routing\Router;
 use RZQ\TawkTo\Http\Middleware\Authenticate;
+use RZQ\TawkTo\Filament\Resources\TawkToSettingsResource;
 
 class TawkToServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,12 @@ class TawkToServiceProvider extends ServiceProvider
         $router = $this->app->make(Router::class);
         $kernel->appendMiddlewareToGroup('web', Authenticate::class);
         $router->aliasMiddleware('tawk.auth', Authenticate::class);
+
+        $this->publishes([
+            __DIR__.'/../Filament/Resources' => resource_path('Filament/Resources'),
+        ], 'filament-resources');
+
+        TawkToSettingsResource::register();
     }
 
     /**
